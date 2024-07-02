@@ -20,7 +20,7 @@ Com os arquivos dentro da pasta então, faça os seguintes comandos:
     source ./nome_para_sua_pasta_virtual/bin/activate
 
 ### Instalando os requerimentos:
-    pip install -r requerimentos.txt
+    pip install -r dependencias.txt
 
 ### Executando o programa que eu fiz:
     python main.py
