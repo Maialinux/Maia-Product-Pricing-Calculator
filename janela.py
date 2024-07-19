@@ -11,6 +11,7 @@ class Janela():
         self.janelaMain.geometry("1280x900")
         self.title = self.janelaMain.title("Calculadora de Precificação de Produtos")
         self.classificacao=ctk.StringVar(value="off")
+        
         pass
     
     
@@ -20,6 +21,7 @@ class Janela():
         self.Painel_Left()
         self.Botao()
         self.Painel_Right()
+        self.BotaoLimpar()
         self.janelaMain.mainloop()
 
     
@@ -110,6 +112,10 @@ class Janela():
     def Botao(self):
         botao = ctk.CTkButton(self.janelaMain,text=">>>",font=ctk.CTkFont(family="Verdana",size=30),width=100,height=50,command=self.ResultadoFinal)
         botao.place(relx=0.5,rely=0.5, anchor=ctk.CENTER)
+    
+    def BotaoLimpar(self):
+        botaoLimpar = ctk.CTkButton(self.janelaMain,text="Limpar",font=ctk.CTkFont(family="Verdana",size=24),width=100,height=50,command=self.Func_Limpar)
+        botaoLimpar.place(relx=0.5,rely=0.6, anchor=ctk.CENTER)
 
     def Painel_Right(self):
         self.painel_right = ctk.CTkFrame(self.janelaMain,width=580, height=740)
@@ -118,17 +124,34 @@ class Janela():
         label_titulo1 = ctk.CTkLabel(self.painel_right,text="Resultados",font=ctk.CTkFont(family="Verdana",size=24,weight="bold"))
         label_titulo1.place(relx=0.5,rely=0.04, anchor=ctk.CENTER)
         
-        label_margem_liquida = ctk.CTkLabel(self.painel_right,text="Margem Líquida                                     R$",font=ctk.CTkFont(family="Verdana",size=20,weight="normal"))
+        label_margem_liquida = ctk.CTkLabel(self.painel_right,text="Margem Líquida                                 R$",font=ctk.CTkFont(family="Verdana",size=20,weight="normal"))
         label_margem_liquida.place(relx=0.04,rely=0.1, anchor=W)
         self.label_resultado_margem_liquida = ctk.CTkLabel(self.painel_right,text="0.00",font=ctk.CTkFont(family="Verdana",size=20,weight="bold"), text_color="#00C500")
         self.label_resultado_margem_liquida.place(relx=0.86,rely=0.1, anchor=W)
 
-        label_lucro_liquido = ctk.CTkLabel(self.painel_right,text="Lucro Líquido                                         R$",font=ctk.CTkFont(family="Verdana",size=20,weight="normal"))
+        label_lucro_liquido = ctk.CTkLabel(self.painel_right,text="Lucro Líquido                                     R$",font=ctk.CTkFont(family="Verdana",size=20,weight="normal"))
         label_lucro_liquido.place(relx=0.04,rely=0.16, anchor=W)
         self.label_resultado_lucro_liquido = ctk.CTkLabel(self.painel_right,text="0.00",font=ctk.CTkFont(family="Verdana",size=20,weight="bold"), text_color="#00C500")
         self.label_resultado_lucro_liquido.place(relx=0.86,rely=0.16, anchor=W)
-
-
+      
+        # EXEMPLO DE NÚMEROS DE VENDAS
+        label_titulo2 = ctk.CTkLabel(self.painel_right,text="Exemplo de Nº de Vendas",font=ctk.CTkFont(family="Verdana",size=24,weight="bold"))
+        label_titulo2.place(relx=0.5,rely=0.5, anchor=ctk.CENTER)
+        # ESTIMATIVA DE 7 VENDAS 
+        label_vendas1 = ctk.CTkLabel(self.painel_right,text="7 Vendas                                           R$",font=ctk.CTkFont(family="Verdana",size=20,weight="normal"))
+        label_vendas1.place(relx=0.04,rely=0.56, anchor=W)
+        self.label_resultado_vendas1 = ctk.CTkLabel(self.painel_right,text="0.00",font=ctk.CTkFont(family="Verdana",size=20,weight="bold"), text_color="#00C500")
+        self.label_resultado_vendas1.place(relx=0.86,rely=0.56, anchor=W)
+        # ESTIMATIVA DE 15 VENDAS 
+        label_vendas2 = ctk.CTkLabel(self.painel_right,text="15 Vendas                                         R$",font=ctk.CTkFont(family="Verdana",size=20,weight="normal"))
+        label_vendas2.place(relx=0.04,rely=0.62, anchor=W)
+        self.label_resultado_vendas2 = ctk.CTkLabel(self.painel_right,text="0.00",font=ctk.CTkFont(family="Verdana",size=20,weight="bold"), text_color="#00C500")
+        self.label_resultado_vendas2.place(relx=0.86,rely=0.62, anchor=W)
+        # ESTIMATIVA DE 30 VENDAS 
+        label_vendas3 = ctk.CTkLabel(self.painel_right,text="30 Vendas                                         R$",font=ctk.CTkFont(family="Verdana",size=20,weight="normal"))
+        label_vendas3.place(relx=0.04,rely=0.68, anchor=W)
+        self.label_resultado_vendas3 = ctk.CTkLabel(self.painel_right,text="0.00",font=ctk.CTkFont(family="Verdana",size=20,weight="bold"), text_color="#00C500")
+        self.label_resultado_vendas3.place(relx=0.86,rely=0.68, anchor=W)
 
     def Click_txt_preco_fornecedor(self,event):
         self.txt_preco_fornecedor.delete("0",END)
@@ -188,7 +211,6 @@ class Janela():
         total_taxa_produto_importado = float(totalLucroBruto) * porcento_taxa_produto_importado
         self.txt_taxa_produto_importado.insert(END,round(total_taxa_produto_importado,2))
         # Cálculo da Taxa ICMS
-        self.txt_taxa_icms
         self.txt_taxa_icms.delete("0",END)
         self.txt_taxa_icms.configure(text_color="#555555")
         self.txt_taxa_icms.focus()
@@ -208,6 +230,7 @@ class Janela():
             total_lucro_liquido = float(totalLucroBruto) - float(self.txt_gateway_de_pagamentos.get()) - float(self.txt_irpf.get())
             self.label_resultado_lucro_liquido.configure(text=f"{round(total_lucro_liquido,2)}")
         
+
         else:
             totalPrecoFornecedorFrete = float(self.txt_preco_fornecedor.get()) + float(self.txt_frete_fornecedor.get())
             totalLucroBruto = float(self.txt_preco_na_loja.get()) - totalPrecoFornecedorFrete
@@ -222,4 +245,40 @@ class Janela():
             total_txt_taxa_icms = float(totalLucroBruto) * porcento_taxa_icms
             total_lucro_liquido = float(totalLucroBruto) - total_gateway_pagamento - total_irpf - total_taxa_produto_importado - total_txt_taxa_icms
             self.label_resultado_lucro_liquido.configure(text=f"{round(total_lucro_liquido,2)}")
-        
+          
+        # Exemplo de 7 vendas  
+        self.label_resultado_vendas1.configure(text=f"{round(total_lucro_liquido * 7,2)}")
+        # Exemplo de 15 vendas  
+        self.label_resultado_vendas2.configure(text=f"{round(total_lucro_liquido * 15,2)}")
+        # Exemplo de 30 vendas  
+        self.label_resultado_vendas3.configure(text=f"{round(total_lucro_liquido * 30,2)}")
+    
+
+    def Func_Limpar(self):
+       self.txt_preco_fornecedor.delete("0",END)
+       self.txt_preco_fornecedor.insert(END, "0.00")
+       self.txt_preco_fornecedor.configure(text_color="#D4D4D4")
+       self.txt_frete_fornecedor.delete("0",END)
+       self.txt_frete_fornecedor.insert(END, "0.00")
+       self.txt_frete_fornecedor.configure(text_color="#D4D4D4")
+       self.label_resultado_produto_mais_frete.configure(text="R$ 0.00")
+       self.txt_preco_na_loja.delete("0",END)
+       self.txt_preco_na_loja.insert(END, "0.00")
+       self.txt_preco_na_loja.configure(text_color="#D4D4D4")
+       self.txt_gateway_de_pagamentos.delete("0",END)
+       self.txt_gateway_de_pagamentos.insert(END, "0.00")
+       self.txt_gateway_de_pagamentos.configure(text_color="#D4D4D4")
+       self.txt_irpf.delete("0",END)
+       self.txt_irpf.insert(END, "0.00")
+       self.txt_irpf.configure(text_color="#D4D4D4")
+       self.txt_taxa_produto_importado.delete("0",END)
+       self.txt_taxa_produto_importado.insert(END, "0.00")
+       self.txt_taxa_produto_importado.configure(text_color="#D4D4D4")
+       self.txt_taxa_icms.delete("0",END)
+       self.txt_taxa_icms.insert(END, "0.00")
+       self.txt_taxa_icms.configure(text_color="#D4D4D4")
+       self.label_resultado_margem_liquida.configure(text="0.00")
+       self.label_resultado_lucro_liquido.configure(text="0.00")
+       self.label_resultado_vendas1.configure(text="0.00")
+       self.label_resultado_vendas2.configure(text="0.00")
+       self.label_resultado_vendas3.configure(text="0.00")
