@@ -1,8 +1,10 @@
 # Programa de Precificação de Produtos
 
-<img src="img.jpg"/>
+<img src="img1.jpg"/>
 
 ### Fiz este programa com python 3.11.2 para conseguir visualizar meu lucro na venda de produtos nacionais e importados. Você pode baixar e implementar novas funcionalidades se quiser.
+
+<img src="img2.jpg"/>
 
 ## Como usá-lo?
 
