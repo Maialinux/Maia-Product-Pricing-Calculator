@@ -10,6 +10,8 @@ class Janela():
         self.tema = ctk.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
         self.janelaMain.geometry("1280x900")
         self.title = self.janelaMain.title("Calculadora de Precificação de Produtos")
+        self.imgfavicon = PhotoImage(file="icone-dark/price-store-dark16x16.png")
+        self.favicon = self.janelaMain.iconphoto(True,self.imgfavicon)
         self.classificacao=ctk.StringVar(value="off")
         
         pass
